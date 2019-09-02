@@ -12,7 +12,7 @@ services:
       - ./certs:/etc/certs
     depends_on:
       - wordpress
-    restart: always
+    restart: always 
 
   mysql:
     image: mariadb
@@ -27,6 +27,8 @@ services:
       - '3306:3306'
 
   wordpress:
+    image: wordpress:latest
+    domainname: myapp2.local
     build:
       context: .
       dockerfile: Dockerfile
@@ -41,7 +43,7 @@ services:
       - WORDPRESS_DB_PASSWORD=password
     depends_on:
       - mysql
-    restart: always
+    # restart: always
 
  # phpmyadmin
   phpmyadmin:
