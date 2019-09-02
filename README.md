@@ -95,10 +95,11 @@ docker-compose up -d --force-recreate --build
 ### Tools
 
 #### wp-cli
+old. => new.
 
 ```
 docker exec -it myapp-wordpress bash
-wp search-replace https://olddomain.com https://newdomain.com --allow-root
+wp search-replace https://olddomain.com https://myapp.local --allow-root
 ```
 
 ### Changelog

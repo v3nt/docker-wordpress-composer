@@ -54,8 +54,8 @@ services:
       - '9001:80'
     environment:
       PMA_HOST: mysql
-      MYSQL_USER: "${DB_USER}" 
-      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}" 
+      MYSQL_USER: root 
+      MYSQL_ROOT_PASSWORD: password 
 
   composer:
     image: composer/composer
