@@ -28,7 +28,6 @@ services:
 
   wordpress:
     image: wordpress:latest
-    domainname: myapp2.local
     build:
       context: .
       dockerfile: Dockerfile
