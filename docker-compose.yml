@@ -20,8 +20,8 @@ services:
     volumes:
        - './data/db:/var/lib/mysql:delegated'
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=myapp
+      - MYSQL_ROOT_PASSWORD="${DB_PASSWORD}"
+      - MYSQL_DATABASE="${DB_NAME}"
     restart: always
     ports:
       - '3306:3306'
@@ -32,13 +32,15 @@ services:
       dockerfile: Dockerfile
     container_name: myapp-wordpress
     volumes:
-      - ./src:/var/www/html:rw,cached
+      - ./src:/var/www/html:rw,cached 
+      - ./theme-base:/var/www/html/wp-content/themes/theme-base
+      - ./.env:/var/www/html/.env
       - ./config/php.ini:/usr/local/etc/php/conf.d/php.ini
     environment:
-      - WORDPRESS_DB_NAME=myapp
+      - WORDPRESS_DB_NAME="${DB_NAME}"
       - WORDPRESS_TABLE_PREFIX=wp_
       - WORDPRESS_DB_HOST=mysql
-      - WORDPRESS_DB_PASSWORD=password
+      - WORDPRESS_DB_PASSWORD="${DB_PASSWORD}"
     depends_on:
       - mysql
     restart: always
