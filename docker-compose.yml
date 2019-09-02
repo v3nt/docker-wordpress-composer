@@ -43,6 +43,20 @@ services:
       - mysql
     restart: always
 
+ # phpmyadmin
+  phpmyadmin:
+    container_name: myapp-phpmyadmin
+    depends_on:
+      - mysql
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - '9001:80'
+    environment:
+      PMA_HOST: mysql
+      MYSQL_USER: "${DB_USER}" 
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}" 
+
   composer:
     image: composer/composer
     container_name: myapp-composer
