@@ -1,4 +1,6 @@
 #!/bin/bash
+# may need writes to execute
+# `chmod +x export.sh`
 set -e
 echo " to export!"
 
