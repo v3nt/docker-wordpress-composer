@@ -6,3 +6,4 @@ RUN chmod +x /bin/wp-cli.phar
 RUN cd /bin && mv wp-cli.phar wp
 
 # Note: Use docker-compose up -d --force-recreate --build when Dockerfile has changed.
+# ENV PATH="/opt/gtk/bin:${PATH}"
