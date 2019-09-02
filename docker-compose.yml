@@ -14,9 +14,10 @@ services:
       - wordpress
     restart: always 
 
-  mysql:
+  db:
     image: mariadb
-    container_name: myapp-mysql
+    container_name: myapp-db
+    # env_file: ./src/.env
     volumes:
        - './data/db:/var/lib/mysql:delegated'
     environment:
@@ -35,28 +36,28 @@ services:
     volumes:
       - ./src:/var/www/html:rw,cached 
       - ./theme-base:/var/www/html/wp-content/themes/theme-base
-      - ./.env:/var/www/html/.env
       - ./config/php.ini:/usr/local/etc/php/conf.d/php.ini
     environment:
       - WORDPRESS_DB_NAME="${DB_NAME}"
-      - WORDPRESS_TABLE_PREFIX=wp_
+      - WORDPRESS_TABLE_PREFIX="${DB_NAME}"
       - WORDPRESS_DB_HOST=mysql
-      - WORDPRESS_DB_PASSWORD="${DB_PASSWORD}"
+      - WORDPRESS_DB_PASSWORD="${DB_PREFIX}"
     depends_on:
-      - mysql
+      - db
     # restart: always
 
  # phpmyadmin
   phpmyadmin:
+    env_file: ./src/.env
     container_name: myapp-phpmyadmin
     depends_on:
-      - mysql
+      - db
     image: phpmyadmin/phpmyadmin
     restart: always
     ports:
       - '9001:80'
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: db
       MYSQL_USER: root 
       MYSQL_ROOT_PASSWORD: password 
 

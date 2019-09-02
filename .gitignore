@@ -16,6 +16,7 @@ sql-dump-*.sql
 
 # Dotenv
 !.env
+!./src/.env
 .env.*
 !.env.example
 

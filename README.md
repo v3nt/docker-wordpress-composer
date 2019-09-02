@@ -66,6 +66,14 @@ DB_USER=root
 DB_PASSWORD=password
 ```
 
+
+## remove old datbase containers
+```
+docker-compose rm -v
+docker volume rm $(docker volume ls -q )
+```
+
+
 ## Install WordPress and Composer dependencies
 
 ```shell
